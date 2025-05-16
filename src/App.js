@@ -13,7 +13,16 @@ function App() {
     { src: "/assets/photo8.png", caption: "Chairman of Department" },
     { src: "/assets/photo9.png", caption: "Professors' Office" },
     { src: "/assets/photo10.png", caption: "Control" },
-    { src: "/assets/photo11.png", caption: "WC" },
+    { src: "/assets/photo11.png", caption: "Farsi Hall" },
+    { src: "/assets/photo12.png", caption: "Farsi Hall" },
+    { src: "/assets/photo13.png", caption: "Farsi Hall Wall Art" },
+    { src: "/assets/photo14.png", caption: "First Year Studio" },
+    { src: "/assets/photo15.png", caption: "Second Year Studio" },
+    { src: "/assets/photo16.png", caption: "Second Year Studio" },
+    { src: "/assets/photo17.png", caption: "Second Year Studio" },
+    { src: "/assets/photo18.png", caption: "Projects Exhibition" },
+    { src: "/assets/photo19.png", caption: "Projects Exhibition" },
+    { src: "/assets/photo20.png", caption: "Projects Exhibition" },
   ];
 
   const galleryRef = useRef(null);
