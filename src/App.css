@@ -343,9 +343,9 @@ html {
 .videos {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 20px;
   justify-content: center;
-  padding: 80px 20px;
+  padding: 40px 20px;
   background-color: #2a3440;
 }
 
