@@ -25,50 +25,76 @@ function App() {
     { src: "/assets/photo20.png", caption: "Projects Exhibition" },
   ];
 
+
   const galleryRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+  const scrollTimeoutRef = useRef(null);
+  
+  const extendedPhotos = [
+    photos[photos.length - 1],
+    ...photos,
+    photos[0]
+  ];
 
   const scrollGallery = (direction) => {
     if (isAutoScrolling) return;
+    setIsAutoScrolling(true);
 
     const container = galleryRef.current;
-    const scrollAmount = 300;
-    const newIndex =
-      direction === "left"
-        ? (currentIndex - 1 + photos.length) % photos.length
-        : (currentIndex + 1) % photos.length;
+    const itemWidth = 300; // Match your gallery-item width
+    const gap = 25; // Match your gallery gap
+    const scrollAmount = itemWidth + gap;
 
-    setCurrentIndex(newIndex);
-
-    if (direction === "left" && currentIndex === 0) {
-      container.scrollLeft = container.scrollWidth;
-      setTimeout(() => {
-        container.scrollLeft -= scrollAmount;
-      }, 50);
-    } else if (direction === "right" && currentIndex === photos.length - 1) {
-      container.scrollLeft = 0;
-      setTimeout(() => {
-        container.scrollLeft += scrollAmount;
-      }, 50);
+    if (direction === "left") {
+      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     } else {
-      container.scrollLeft +=
-        direction === "left" ? -scrollAmount : scrollAmount;
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    // Reset flag after scroll completes
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    scrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoScrolling(false);
+      checkLoopPosition();
+    }, 1000);
+  };
+
+  
+  const checkLoopPosition = () => {
+    const container = galleryRef.current;
+    const scrollPosition = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    
+    // If at cloned start (first item), jump to real end
+    if (scrollPosition <= 0) {
+      container.scrollLeft = maxScroll - (300 + 25); // itemWidth + gap
+    } 
+    // If at cloned end (last item), jump to real start
+    else if (scrollPosition >= maxScroll) {
+      container.scrollLeft = 300 + 25; // itemWidth + gap
     }
   };
 
   useEffect(() => {
-    const container = galleryRef.current;
+    if (galleryRef.current) {
+      galleryRef.current.scrollLeft = 300 + 25; 
+    }
+
     const autoScroll = setInterval(() => {
       if (!isAutoScrolling) {
-        setIsAutoScrolling(true);
         scrollGallery("right");
-        setTimeout(() => setIsAutoScrolling(false), 1000);
       }
-    }, 3000);
+    }, 4000);
 
-    return () => clearInterval(autoScroll);
-  }, [currentIndex]);
+    return () => {
+      clearInterval(autoScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -167,37 +193,51 @@ function App() {
       </section>
 
       {/* Gallery Carousel */}
-      <section className="gallery-container">
-  <h2 className="gallery-title">Facilities</h2>
-  <div className="gallery-carousel">
-    <button
-      className="carousel-button left"
-      onClick={() => scrollGallery("left")}
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </button>
+<section className="gallery-container">
+      <h2 className="gallery-title">Facilities</h2>
+      <div className="gallery-carousel">
+        <button
+          className="carousel-button left"
+          onClick={() => scrollGallery("left")}
+          aria-label="Previous photo"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path 
+              d="M15 18L9 12L15 6" 
+              stroke="#f8f5f0" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
 
-    <div className="gallery" ref={galleryRef}>
-      {photos.map((photo, index) => (
-        <div className="gallery-item" key={index}>
-          <img src={photo.src} alt={`Gallery ${index + 1}`} />
-          <p className="caption">{photo.caption}</p>
+        <div className="gallery" ref={galleryRef}>
+          {extendedPhotos.map((photo, index) => (
+            <div className="gallery-item" key={`${index}-${photo.caption}`}>
+              <img src={photo.src} alt={photo.caption} />
+              <p className="caption">{photo.caption}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
 
-    <button
-      className="carousel-button right"
-      onClick={() => scrollGallery("right")}
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </button>
-  </div>
-</section>
+        <button
+          className="carousel-button right"
+          onClick={() => scrollGallery("right")}
+          aria-label="Next photo"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path 
+              d="M9 18L15 12L9 6" 
+              stroke="#f8f5f0" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
 
 
       <section className="videos">
