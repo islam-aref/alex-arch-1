@@ -207,7 +207,8 @@ function App() {
           ></iframe>
         </div>
         <div className="video-container">
-          <h3>Meet the minds behind our success</h3>
+          <h3>Meet the minds</h3>
+          <h3>Behind Our Success</h3>
           <iframe
             src="https://drive.google.com/file/d/129UOId-sjdCmDT7bF0CXrV1yd9zITMv1/preview"
             title="Student Experiences"
