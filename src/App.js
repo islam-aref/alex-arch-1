@@ -191,7 +191,7 @@ function App() {
         <div className="video-container">
           <h3>Discover our facilities</h3>
           <iframe
-            src="https://drive.google.com/file/d/1Sgm8R_dVJ_bCnOQ_X4Mmi9SYwGykkPKW/view"
+            src="https://drive.google.com/file/d/1Sgm8R_dVJ_bCnOQ_X4Mmi9SYwGykkPKW/preview"
             title="Our Story"
             allowFullScreen
           ></iframe>
