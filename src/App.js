@@ -168,32 +168,36 @@ function App() {
 
       {/* Gallery Carousel */}
       <section className="gallery-container">
-        <h2 className="gallery-title">Facilities</h2>
-        <div className="gallery-carousel">
-          <button
-            className="carousel-button left"
-            onClick={() => scrollGallery("left")}
-          >
-            &lt;
-          </button>
+  <h2 className="gallery-title">Facilities</h2>
+  <div className="gallery-carousel">
+    <button
+      className="carousel-button left"
+      onClick={() => scrollGallery("left")}
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </button>
 
-          <div className="gallery" ref={galleryRef}>
-            {photos.map((photo, index) => (
-              <div className="gallery-item" key={index}>
-                <img src={photo.src} alt={`Gallery ${index + 1}`} />
-                <p className="caption">{photo.caption}</p>
-              </div>
-            ))}
-          </div>
-
-          <button
-            className="carousel-button right"
-            onClick={() => scrollGallery("right")}
-          >
-            &gt;
-          </button>
+    <div className="gallery" ref={galleryRef}>
+      {photos.map((photo, index) => (
+        <div className="gallery-item" key={index}>
+          <img src={photo.src} alt={`Gallery ${index + 1}`} />
+          <p className="caption">{photo.caption}</p>
         </div>
-      </section>
+      ))}
+    </div>
+
+    <button
+      className="carousel-button right"
+      onClick={() => scrollGallery("right")}
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</section>
 
 
       <section className="videos">
