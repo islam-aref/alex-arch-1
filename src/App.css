@@ -343,7 +343,7 @@ html {
 .videos {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 50px;
   justify-content: center;
   padding: 40px 20px;
   background-color: #2a3440;
@@ -354,6 +354,7 @@ html {
   min-width: 350px;
   max-width: 360px;
   text-align: center;
+  margin: 0 10px
 }
 
 .video-container h3 {
