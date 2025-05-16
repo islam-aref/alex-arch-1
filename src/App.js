@@ -199,7 +199,7 @@ function App() {
         <div className="video-container">
           <h3>Meet the minds behind our success</h3>
           <iframe
-            src="https://www.youtube.com/embed/ojYghEPEQqc?si=rxE0AdJ9Jqdt6Vmf"
+            src="https://drive.google.com/file/d/129UOId-sjdCmDT7bF0CXrV1yd9zITMv1/preview"
             title="Student Experiences"
             allowFullScreen
           ></iframe>
