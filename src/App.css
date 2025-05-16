@@ -29,7 +29,7 @@ html {
   padding: 20px 40px;
   color: #f8f5f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 100;
 }
